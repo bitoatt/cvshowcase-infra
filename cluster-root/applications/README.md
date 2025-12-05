@@ -1,6 +1,7 @@
 - ArgoCD self-management
-- External Secrets Operator
-- Plex media server
-- cvshowcase-frontend
-- cvshowcase-backend
+- Cert manager
+- External Secrets Operator (TBD)
+- Plex media server (TBD)
+- cvshowcase-frontend (TBD)
+- cvshowcase-backend (TBD)
 - Monitoring stack (TBD)

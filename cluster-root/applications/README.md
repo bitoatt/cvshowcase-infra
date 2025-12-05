@@ -1,0 +1,6 @@
+- ArgoCD self-management
+- External Secrets Operator
+- Plex media server
+- cvshowcase-frontend
+- cvshowcase-backend
+- Monitoring stack (TBD)

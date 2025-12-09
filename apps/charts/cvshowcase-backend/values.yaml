@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: httpd #ghcr.io/bitoatt/cvshowcase-backend
+  tag: "apline"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 5000
+  targetPort: 5000
+
+ingress:
+  enabled: true
+  className: nginx
+  host: app.example.com
+  tls:
+    enabled: true
+    secretName: cvshowcase-backend-tls
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

@@ -17,14 +17,14 @@ jobs:
           echo "API_PUBLIC_HOST=${{ vars.API_PUBLIC_HOST }}" >> $GITHUB_ENV
           echo "PLEX_PRIVATE_HOST=${{ vars.PLEX_PRIVATE_HOST }}" >> $GITHUB_ENV
           echo "ARGO_FAMILY_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "ARGO_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "ELK_FAMILY_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "ELK_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "FAMILY_API_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "FAMILY_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "PLEX_PRIVATE_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "PROM_FAMILY_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
-          echo "PROM_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "ARGO_PUBLIC_HOST=${{ vars.ARGO_PUBLIC_HOST }}" >> $GITHUB_ENV
+          echo "ELK_FAMILY_HOST=${{ vars.ELK_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "ELK_PUBLIC_HOST=${{ vars.ELK_PUBLIC_HOST }}" >> $GITHUB_ENV
+          echo "FAMILY_API_HOST=${{ vars.FAMILY_API_HOST }}" >> $GITHUB_ENV
+          echo "FAMILY_PUBLIC_HOST=${{ vars.FAMILY_PUBLIC_HOST }}" >> $GITHUB_ENV
+          echo "PLEX_PRIVATE_HOST=${{ vars.PLEX_PRIVATE_HOST }}" >> $GITHUB_ENV
+          echo "PROM_FAMILY_HOST=${{ vars.PROM_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "PROM_PUBLIC_HOST=${{ vars.PROM_PUBLIC_HOST }}" >> $GITHUB_ENV
 
       - name: Render cvshowcase-frontend manifests
         run: |

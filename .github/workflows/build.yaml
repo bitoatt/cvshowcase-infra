@@ -66,20 +66,25 @@ jobs:
 
       - name: Copy manifests into env repo
         run: |
-          mkdir -p env-repo/clusters/home-cluster/apps
-          cp rendered/cvshowcase-frontend.yaml env-repo/clusters/home-cluster/apps/
-          cp rendered/cvshowcase-backend.yaml env-repo/clusters/home-cluster/apps/
-          cp rendered/plex.yaml env-repo/clusters/home-cluster/apps/
+          mkdir -p env-repo/clusters/vulcan/apps
+          cp rendered/cvshowcase-frontend.yaml env-repo/clusters/vulcan/apps/
+          cp rendered/cvshowcase-backend.yaml env-repo/clusters/vulcan/apps/
+          cp rendered/plex.yaml env-repo/clusters/vulcan/apps/
 
       - name: Commit & push
         run: |
           cd env-repo
           git config user.name "cvshowcase-bot"
           git config user.email "bot@attilabito.com"
-          if git diff --quiet; then
+
+          git add clusters/vulcan/apps/cvshowcase-frontend.yaml \
+                  clusters/vulcan/apps/cvshowcase-backend.yaml \
+                  clusters/vulcan/apps/plex.yaml
+
+          if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git add clusters/home-cluster/apps
             git commit -m "chore: update rendered manifests from infra"
             git push
           fi
+

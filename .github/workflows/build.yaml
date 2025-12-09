@@ -16,28 +16,46 @@ jobs:
           echo "APP_PUBLIC_HOST=${{ vars.APP_PUBLIC_HOST }}" >> $GITHUB_ENV
           echo "API_PUBLIC_HOST=${{ vars.API_PUBLIC_HOST }}" >> $GITHUB_ENV
           echo "PLEX_PRIVATE_HOST=${{ vars.PLEX_PRIVATE_HOST }}" >> $GITHUB_ENV
-          # TODO continue with the others
-
+          echo "ARGO_FAMILY_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "ARGO_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "ELK_FAMILY_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "ELK_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "FAMILY_API_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "FAMILY_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "PLEX_PRIVATE_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "PROM_FAMILY_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
+          echo "PROM_PUBLIC_HOST=${{ vars.ARGO_FAMILY_HOST }}" >> $GITHUB_ENV
 
       - name: Render cvshowcase-frontend manifests
         run: |
           mkdir -p rendered
-          helm template cvshowcase-frontend charts/cvshowcase-frontend \
+          helm template cvshowcase-frontend apps/charts/cvshowcase-frontend \
             --set ingress.host=${APP_PUBLIC_HOST} \
             > rendered/cvshowcase-frontend.yaml
 
       - name: Render cvshowcase-backend manifests
         run: |
-          helm template cvshowcase-backend charts/cvshowcase-backend \
+          helm template cvshowcase-backend apps/charts/cvshowcase-backend \
             --set ingress.host=${API_PUBLIC_HOST} \
             > rendered/cvshowcase-backend.yaml
 
       - name: Render plex manifests
         run: |
-          helm template plex charts/plex \
+          helm template plex apps/charts/plex \
             --set ingress.host=${PLEX_PRIVATE_HOST} \
             > rendered/plex.yaml
-      # TODO continue with the others
+
+      - name: Render plex manifests
+        run: |
+          helm template cvshowcase-backend apps/charts/cvshowcase-backend \
+            --set ingress.host=${API_PUBLIC_HOST} \
+            > rendered/cvshowcase-backend.yaml
+          helm template cvshowcase-frontend apps/charts/cvshowcase-frontend \
+            --set ingress.host=${APP_PUBLIC_HOST} \
+            > rendered/cvshowcase-frontend.yaml
+          helm template plex apps/charts/plex \
+            --set ingress.host=${PLEX_PRIVATE_HOST} \
+            > rendered/plex.yaml
 
       - name: Checkout private env repo
         uses: actions/checkout@v4
@@ -52,7 +70,6 @@ jobs:
           cp rendered/cvshowcase-frontend.yaml env-repo/clusters/home-cluster/apps/
           cp rendered/cvshowcase-backend.yaml env-repo/clusters/home-cluster/apps/
           cp rendered/plex.yaml env-repo/clusters/home-cluster/apps/
-          # TODO continue with the others
 
       - name: Commit & push
         run: |

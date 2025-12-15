@@ -20,11 +20,11 @@ ingress:
 
 persistence:
   media:
-    size: 900Gi
-    hostPath: /srv/plex-media
+    size: 1500Gi
+    hostPath: /srv/plex/data
 
   config:
-    enabled: /srv/plex-config
+    enabled: /srv/plex/config
 
 resources: {}
 nodeSelector: {}
